@@ -248,12 +248,12 @@ FormData.prototype._getContentType = function(value, options) {
 
   // or try `name` from formidable, browser
   if (!contentType && value.name) {
-    contentType = mime.getType(value.name);
+    contentType = getType(value.name);
   }
 
   // or try `path` from fs-, request- streams
   if (!contentType && value.path) {
-    contentType = mime.getType(value.path);
+    contentType = getType(value.path);
   }
 
   // or if it's http-reponse
@@ -263,7 +263,7 @@ FormData.prototype._getContentType = function(value, options) {
 
   // or guess it from the filepath or filename
   if (!contentType && (options.filepath || options.filename)) {
-    contentType = mime.getType(options.filepath || options.filename);
+    contentType = getType(options.filepath || options.filename);
   }
 
   // fallback to the default content type if `value` is not simple value
@@ -499,3 +499,9 @@ FormData.prototype._error = function(err) {
 FormData.prototype.toString = function () {
   return '[object FormData]';
 };
+
+function getType(value) {
+  var ct = mime.getType(value);
+  if (!ct) { console.log("[ERROR] Content-Type not found. Manually set it or update here - https://github.com/ASaiAnudeep/mime-lite") }
+  return ct;
+}
