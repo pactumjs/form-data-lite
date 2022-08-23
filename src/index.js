@@ -502,6 +502,6 @@ FormData.prototype.toString = function () {
 
 function getType(value) {
   var ct = mime.getType(value);
-  if (!ct) { console.log("[ERROR] Content-Type not found. Manually set it or update here - https://github.com/ASaiAnudeep/mime-lite") }
+  if (!ct) { console.log("[ERROR] Content-Type not found. Manually set it or update here - https://github.com/pactumjs/mime-lite") }
   return ct;
 }
